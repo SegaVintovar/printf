@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
-
+#include "printf.h"
 
 // analyze first arg for the format specifier %
 
@@ -31,6 +31,7 @@ int ft_printf(const char *s, ...)
 	size_t	i;
 	va_start(arguments, s);
 
+	result = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -53,14 +54,18 @@ int ft_printf(const char *s, ...)
 		i++;
 	}
 	va_end(arguments);
+	return (result);
 }
 
 int main()
 {
-	ft_printf();
-	printf(void *(0));
-	printf("\n");
-	printf("%p", void *(0));
+	int i;
+	
+	i = ft_printf("This is my test char %%\n");
+	ft_printf("this is i %i\n", i);
+	// printf(void *(0));
+	// printf("\n");
+	// printf("%p", void *(0));
 	return (0);
 }
 
