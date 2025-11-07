@@ -1,29 +1,46 @@
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vs <vs@student.42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 22:12:49 by vs                #+#    #+#             */
+/*   Updated: 2025/11/07 22:36:12 by vs               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
-// analyze first arg for the format specifier %
+int	print_format(const char *s, va_list	arguments)
+{
+	size_t	i;
+	int		result;
 
-// char src_an(const char *s)
-// {
-// 	size_t	i;
+	result = 0;
+	i = 0;
+	while(s[i] != '\0')
+	{
+		if (s[i] == 'c')
+			result += ft_putchar(va_arg(arguments, int));
+		if (s[i] == 's')
+			result += ft_putstr(va_arg(arguments, char *));
+		if (s[i] == 'd' || s[i] == 'i' || s[i] == 'u')
+			result += ft_putnbr(va_arg(arguments, int));
+		if (s[i] == 'p')
+			result += ft_putptr(va_arg(arguments, unsigned long)); // how to write ptr(hex)
+		if (s[i] == 'x')
+			result += ft_puthex(va_arg(arguments, unsigned int));
+		if (s[i] == 'X')
+			result += ft_putbhex(va_arg(arguments, unsigned int));
+		if (s[i] == '%')
+			result += ft_putchar('%');
+		i++;
+	}
+	return (result);
+}
 
-// 	i = 0;
-// 	while (s[i] != '\0')
-// 	{
-// 		if (s[i] == '%')
-// 		{
-// 			if (s[i + 1] == 'c')
-// 			// declare that this is putchar()
-// 			if (s[i + 1] == 's')
-// 			// putstr
-// 			if ()
-// 		}
-// 		i++;
-// 	}
-	
-// }
+
 int ft_printf(const char *s, ...)
 {
 	int		result;
@@ -31,23 +48,13 @@ int ft_printf(const char *s, ...)
 	size_t	i;
 	va_start(arguments, s);
 
-	result = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == '%')
 		{
 			i++;
-			if (s[i] == 'c')
-				result += ft_putchar(va_arg(arguments, int));
-			if (s[i] == 's')
-				result += ft_putstr(va_arg(arguments, char *));
-			if (s[i] == 'd' || s[i] == 'i')
-				result += ft_putnbr(va_arg(arguments, int));
-			//if (s[i] == 'p')
-			//	result += ft_putptr(va_arg(arguments, )) -- how to write ptr(hex)
-			if (s[i] == '%')
-				result += ft_putchar('%');
+			result += print_format(s[i], arguments);
 		}
 		else
 			result += ft_putchar(s[i]);
@@ -56,6 +63,38 @@ int ft_printf(const char *s, ...)
 	va_end(arguments);
 	return (result);
 }
+// int ft_printf(const char *s, ...)
+// {
+// 	int		result;
+// 	va_list	arguments;
+// 	size_t	i;
+// 	va_start(arguments, s);
+
+// 	result = 0;
+// 	i = 0;
+// 	while (s[i] != '\0')
+// 	{
+// 		if (s[i] == '%')
+// 		{
+// 			i++;
+// 			if (s[i] == 'c')
+// 				result += ft_putchar(va_arg(arguments, int));
+// 			if (s[i] == 's')
+// 				result += ft_putstr(va_arg(arguments, char *));
+// 			if (s[i] == 'd' || s[i] == 'i')
+// 				result += ft_putnbr(va_arg(arguments, int));
+// 			//if (s[i] == 'p')
+// 			//	result += ft_putptr(va_arg(arguments, )) -- how to write ptr(hex)
+// 			if (s[i] == '%')
+// 				result += ft_putchar('%');
+// 		}
+// 		else
+// 			result += ft_putchar(s[i]);
+// 		i++;
+// 	}
+// 	va_end(arguments);
+// 	return (result);
+// }
 
 int main()
 {

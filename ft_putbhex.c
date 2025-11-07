@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_putbhex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vs <vs@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 15:17:18 by vsudak            #+#    #+#             */
-/*   Updated: 2025/11/07 17:35:41 by vs               ###   ########.fr       */
+/*   Created: 2025/11/07 17:37:15 by vs                #+#    #+#             */
+/*   Updated: 2025/11/07 17:53:16 by vs               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int swap_n_print(char *to_print, size_t len)
 	return (ft_putstr(to_print));
 }
 
-int ft_puthex(unsigned int n)
+int ft_putbhex(unsigned int n)
 {
-	char *hex = "0123456789abcdef";
+	char *hex = "0123456789ABCDEF";
 	char to_print[32];
 	size_t	i;
 
@@ -43,7 +43,5 @@ int ft_puthex(unsigned int n)
 		n = n / 16;
 	}
 	to_print[i] = '\0';
-	
-	// swap and print
 	return (swap_n_print(to_print, i));
 }

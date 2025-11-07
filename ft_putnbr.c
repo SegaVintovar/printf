@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_putnbr.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: vs <vs@student.42.fr>                        +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/10/27 17:27:38 by vsudak        #+#    #+#                 */
-/*   Updated: 2025/11/06 14:27:53 by vsudak        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vs <vs@student.42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/27 17:27:38 by vsudak            #+#    #+#             */
+/*   Updated: 2025/11/07 22:38:01 by vs               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,20 @@ int	ft_putnbr(int n)
 	result = 0;
 	nbr = n;
 	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return (11);
-	}
+		return (write(1, "-2147483648", 11));
 	if (nbr < 0)
 	{
 		nbr = nbr * (-1);
-		write(1, "-", 1);
-		result++;
+		result += write(1, "-", 1);
 	}
 	if (nbr <= 9)
 	{
 		c = nbr + '0';
-		write(1, &c, 1);
-		result++;
+		result += write(1, &c, 1);
 		return (result);
 	}
-	ft_putnbr((nbr / 10));
-	ft_putnbr((nbr % 10));
+	result += ft_putnbr((nbr / 10));
+	result += ft_putnbr((nbr % 10));
 	return (result);
 }
 
