@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vs <vs@student.42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 17:27:38 by vsudak            #+#    #+#             */
-/*   Updated: 2025/11/07 22:38:01 by vs               ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_putnbr.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vs <vs@student.42.fr>                        +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/10/27 17:27:38 by vsudak        #+#    #+#                 */
+/*   Updated: 2025/11/08 19:54:13 by vsudak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "printf.h"
+#include "ft_printf.h"
+#include <limits.h>
 
-int	ft_putnbr(int n)
+int	ft_putnbr(long long n)
 {
-	char	c;
-	long	nbr;
-	int		result;
+	char		c;
+	long long	nbr;
+	int			result;
 
 	result = 0;
 	nbr = n;
-	if (n == -2147483648)
-		return (write(1, "-2147483648", 11));
-	if (nbr < 0)
+	if (n == LONG_MIN)
+		return (write(1, "-9223372036854775808", 20));
+	if (n < 0)
 	{
-		nbr = nbr * (-1);
+		n = n * (-1);
 		result += write(1, "-", 1);
 	}
-	if (nbr <= 9)
+	if (n <= 9)
 	{
-		c = nbr + '0';
+		c = n + '0';
 		result += write(1, &c, 1);
 		return (result);
 	}
-	result += ft_putnbr((nbr / 10));
-	result += ft_putnbr((nbr % 10));
+	result += ft_putnbr((n / 10));
+	result += ft_putnbr((n % 10));
 	return (result);
 }
-
 
 // gitbook shit
 // void	ft_putnbr_fd(int n, int fd)
@@ -69,7 +69,7 @@ int	ft_putnbr(int n)
 
 // int main()
 // {
-// 	int p = -2147483648;
-// 	ft_putnbr_fd(p, 1);
+// 	long p = -2091147483648;
+// 	ft_putnbr(p);
 // 	return(0);
 // }

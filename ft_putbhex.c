@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_putbhex.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vs <vs@student.42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 17:37:15 by vs                #+#    #+#             */
-/*   Updated: 2025/11/07 17:53:16 by vs               ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_putbhex.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: vs <vs@student.42.fr>                        +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/11/07 17:37:15 by vs            #+#    #+#                 */
+/*   Updated: 2025/11/08 12:52:03 by vsudak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-static int swap_n_print(char *to_print, size_t len)
+static int	swap_n_print(char *to_print, size_t len)
 {
-	char tmp;
-	size_t i;
+	char	tmp;
+	size_t	i;
 
 	i = 0;
 	while (i < len / 2)
@@ -28,12 +28,13 @@ static int swap_n_print(char *to_print, size_t len)
 	return (ft_putstr(to_print));
 }
 
-int ft_putbhex(unsigned int n)
+int	ft_putbhex(unsigned int n)
 {
-	char *hex = "0123456789ABCDEF";
-	char to_print[32];
+	char	*hex;
+	char	to_print[32];
 	size_t	i;
 
+	hex = "0123456789ABCDEF";
 	if (n == 0)
 		return (ft_putchar('0'));
 	i = 0;
